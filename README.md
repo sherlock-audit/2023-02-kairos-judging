@@ -90,13 +90,17 @@ Manual Review
 ## Recommendation
 We recommend adding the mechanism during the borrowing process to restrict the maximum `loanToValue` limit and ensure that the lender's share is always greater than zero. This will prevent arithmetic errors.
 
+
+
 ## Discussion
 
 **npasquie**
 
 similar to #34 
 
+**npasquie**
 
+fixed here https://github.com/kairos-loan/kairos-contracts/pull/52
 
 # Issue M-2: useLoan doesn't allow liqudator to specifiy maximum price 
 
@@ -128,6 +132,14 @@ Manual Review
 ## Recommendation
 
 Allow liquidator to specify a max acceptable price to pay
+
+
+
+## Discussion
+
+**npasquie**
+
+fixed here https://github.com/kairos-loan/kairos-contracts/pull/50
 
 # Issue M-3: Adversary can utilize a large number of their own loans to cheat other lenders out of interest 
 
@@ -179,13 +191,18 @@ Manual Review
 
 The relative size of the provisions should be enforced so that one is not much larger than any other one
 
+
+
 ## Discussion
 
 **npasquie**
 
 similar to #66
 
+**npasquie**
 
+fixed by https://github.com/kairos-loan/kairos-contracts/pull/51
+the fix restricts the nb of offer/provision per loan to 1 eliminating the vulnerability
 
 # Issue M-4: minOfferCost can be bypassed in certain scenarios 
 
@@ -237,12 +254,21 @@ Manual Review
 
 Minimum interest should be set based on the percentage of the lowest provision and provision shouldn't be allowed to be lower than some amount. Since this problem occurs when the percentage is less than 1/n (where n is the number of provisions), any single provision should be allowed to be lower than 1/(2n). 
 
+
+
+## Discussion
+
+**npasquie**
+
+fixed by https://github.com/kairos-loan/kairos-contracts/pull/51
+the fix restricts the nb of offer/provision per loan to 1 eliminating the vulnerability
+
 # Issue M-5: If auction price goes to 0, NFT might become unclaimable/ stuck forever 
 
 Source: https://github.com/sherlock-audit/2023-02-kairos-judging/issues/17 
 
 ## Found by 
-deadrxsezzz, GimelSec, Koolex, chaduke, Vagner
+GimelSec, Koolex, Vagner, chaduke, deadrxsezzz
 
 ## Summary
 There are certain ERC20 tokens which revert on zero value transfers (e.g. LEND). If an NFT's price drops down to 0, nobody will be able to claim it as the transaction will always revert.
@@ -275,4 +301,12 @@ Manual Review
 
 ## Recommendation
 Address ERC20 tokens which revert on 0 value transfers. Auctions which are run with such tokens should have a minimal price of 1 wei ( instead of 0)
+
+
+
+## Discussion
+
+**npasquie**
+
+fix: https://github.com/kairos-loan/kairos-contracts/pull/49
 
