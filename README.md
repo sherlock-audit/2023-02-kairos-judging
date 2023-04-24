@@ -102,6 +102,10 @@ similar to #34
 
 fixed here https://github.com/kairos-loan/kairos-contracts/pull/52
 
+**IAm0x52**
+
+Fix looks good. Shares lent are now required to be above a minimum threshold. In conjunction with the change limiting users to only 1 loan offer this eliminates the potential for lender's shares being 0.
+
 # Issue M-2: useLoan doesn't allow liqudator to specifiy maximum price 
 
 Source: https://github.com/sherlock-audit/2023-02-kairos-judging/issues/25 
@@ -140,6 +144,10 @@ Allow liquidator to specify a max acceptable price to pay
 **npasquie**
 
 fixed here https://github.com/kairos-loan/kairos-contracts/pull/50
+
+**IAm0x52**
+
+Fix looks good. Liquidation will now revert if auction price is greater than max price specified
 
 # Issue M-3: Adversary can utilize a large number of their own loans to cheat other lenders out of interest 
 
@@ -204,6 +212,10 @@ similar to #66
 fixed by https://github.com/kairos-loan/kairos-contracts/pull/51
 the fix restricts the nb of offer/provision per loan to 1 eliminating the vulnerability
 
+**IAm0x52**
+
+Fix looks good. All code relevant to multiple offers has been removed. Borrowing, lending, liquidating and distributing to provisions work correctly with only one offer
+
 # Issue M-4: minOfferCost can be bypassed in certain scenarios 
 
 Source: https://github.com/sherlock-audit/2023-02-kairos-judging/issues/23 
@@ -263,6 +275,10 @@ Minimum interest should be set based on the percentage of the lowest provision a
 fixed by https://github.com/kairos-loan/kairos-contracts/pull/51
 the fix restricts the nb of offer/provision per loan to 1 eliminating the vulnerability
 
+**IAm0x52**
+
+Fix looks good. All code relevant to multiple offers has been removed. Borrowing, lending, liquidating and distributing to provisions work correctly with only one offer
+
 # Issue M-5: If auction price goes to 0, NFT might become unclaimable/ stuck forever 
 
 Source: https://github.com/sherlock-audit/2023-02-kairos-judging/issues/17 
@@ -309,4 +325,8 @@ Address ERC20 tokens which revert on 0 value transfers. Auctions which are run w
 **npasquie**
 
 fix: https://github.com/kairos-loan/kairos-contracts/pull/49
+
+**IAm0x52**
+
+Fixes look good. Now uses SafeERC20 and skips zero transfers
 
